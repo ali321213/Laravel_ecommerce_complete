@@ -9,13 +9,9 @@
  */
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Routing
-    |--------------------------------------------------------------------------
-     */
+    /* Routing */
 
-    'use_package_routes'       => true,
+    'use_package_routes' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -23,22 +19,18 @@ return [
     |--------------------------------------------------------------------------
     |
     | If both options are set to false, then shared folder will be activated.
-    |
      */
-
-    'allow_private_folder'     => true,
+    'allow_private_folder' => true,
 
     // Flexible way to customize client folders accessibility
     // If you want to customize client folders, publish tag="lfm_handler"
     // Then you can rewrite userField function in App\Handler\ConfigHandler class
     // And set 'user_field' to App\Handler\ConfigHandler::class
     // Ex: The private folder of user will be named as the user id.
-    'private_folder_name'      => UniSharp\LaravelFilemanager\Handlers\ConfigHandler::class,
-
-    'allow_shared_folder'      => false,
-
-    'shared_folder_name'       => 'shares',
-
+    
+    'private_folder_name' => UniSharp\LaravelFilemanager\Handlers\ConfigHandler::class,
+    'allow_shared_folder' => false,
+    'shared_folder_name' => 'shares',
     /*
     |--------------------------------------------------------------------------
     | Folder Names
@@ -74,68 +66,45 @@ return [
         ],
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Pagination
-    |--------------------------------------------------------------------------
-     */
+    /* Pagination */
 
     'paginator' => [
         'perPage' => 30,
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Upload / Validation
-    |--------------------------------------------------------------------------
-     */
+    /* Upload / Validation */
 
-    'disk'                     => 'public',
-
-    'rename_file'              => false,
-
-    'alphanumeric_filename'    => false,
-
+    'disk' => 'public',
+    'rename_file' => true,
+    'alphanumeric_filename' => false,
     'alphanumeric_directory'   => false,
-
-    'should_validate_size'     => false,
-
-    'should_validate_mime'     => false,
+    'should_validate_size' => false,
+    'should_validate_mime' => false,
 
     // behavior on files with identical name
     // setting it to true cause old file replace with new one
     // setting it to false show `error-file-exist` error and stop upload
     'over_write_on_duplicate'  => false,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Thumbnail
-    |--------------------------------------------------------------------------
-     */
-
+    /* Thumbnail */
     // If true, image thumbnails would be created during upload
     'should_create_thumbnails' => true,
-
-    'thumb_folder_name'        => 'thumbs',
-
+    'thumb_folder_name' => 'thumbs',
     // Create thumbnails automatically only for listed types.
     'raster_mimetypes'         => [
         'image/jpeg',
         'image/pjpeg',
         'image/png',
     ],
-
-    'thumb_img_width'          => 200, // px
-
-    'thumb_img_height'         => 200, // px
-
+    'thumb_img_width' => 200, // px
+    'thumb_img_height' => 200, // px
     /*
     |--------------------------------------------------------------------------
     | File Extension Information
     |--------------------------------------------------------------------------
      */
 
-    'file_type_array'          => [
+    'file_type_array' => [
         'pdf'  => 'Adobe Acrobat',
         'doc'  => 'Microsoft Word',
         'docx' => 'Microsoft Word',
