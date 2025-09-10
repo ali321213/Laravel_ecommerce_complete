@@ -11,13 +11,16 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        // Define image names based on the sequence
         $imageNames = [
-            'aaniasharmaa.jpg', 'aaniasharmaa1.jpg', 'aaniasharmaa2.jpg', 'aaniasharmaa3.jpg',
-            'aaniasharmaa4.jpg', 'aaniasharmaa5.jpg', 'aaniasharmaa6.jpg', 'aaniasharmaa7.jpg',
-            'aaniasharmaa8.jpg', 'aaniasharmaa9.jpg', 'aaniasharmaa10.jpg', 'aaniasharmaa11.jpg',
-            'aaniasharmaa12.jpg', 'aaniasharmaa13.jpg', 'aaniasharmaa14.jpg', 'aaniasharmaa15.jpg',
-            'aaniasharmaa16.jpg', 'aaniasharmaa17.jpg', 'aaniasharmaa18.jpg'
+            // 'aaniasharmaa.jpg', 'aaniasharmaa1.jpg', 'aaniasharmaa2.jpg', 'aaniasharmaa3.jpg',
+            // 'aaniasharmaa4.jpg', 'aaniasharmaa5.jpg', 'aaniasharmaa6.jpg', 'aaniasharmaa7.jpg',
+            // 'aaniasharmaa8.jpg', 'aaniasharmaa9.jpg', 'aaniasharmaa10.jpg', 'aaniasharmaa11.jpg',
+            // 'aaniasharmaa12.jpg', 'aaniasharmaa13.jpg', 'aaniasharmaa14.jpg', 'aaniasharmaa15.jpg',
+            // 'aaniasharmaa16.jpg', 'aaniasharmaa17.jpg', 'aaniasharmaa18.jpg'
+            'product.jpg',
+            'product1.jpg',
+            'product2.jpg',
+            'product3.png',
         ];
 
         $categories = ProductCategory::all();
@@ -40,8 +43,8 @@ class ProductSeeder extends Seeder
                 'short_description' => "This is a short description of $name",
                 'description' => "This is a detailed description of $name",
                 'long_description' => "This is a long description of $name with more details and specifications.",
-                'photo' => "products/aaniasharmaa/$image",  // Use the cyclic image name
-                'featured_image' => "products/aaniasharmaa/$image",  // Use the same for featured image
+                'photo' => "products/$image",
+                'featured_image' => "products/$image",
                 'stock' => rand(5, 100),
                 'size' => ['S', 'M', 'L', 'XL'][array_rand(['S', 'M', 'L', 'XL'])],
                 'condition' => 'default',

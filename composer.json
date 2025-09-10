@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
+        "drewm/mailchimp-api": "^2.5",
         "filament/filament": "^4.0",
         "intervention/image": "^3.11",
         "joelbutcher/socialstream": "^6.3",

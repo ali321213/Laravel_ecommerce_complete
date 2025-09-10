@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{Banner, Product, Category, PostTag, PostCategory, Post, Brand, User};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Hash, Session};
-use Newsletter;
+use DrewM\MailChimp\MailChimp;
 
 class FrontendController extends Controller
 {
@@ -51,7 +51,7 @@ class FrontendController extends Controller
         $products = Product::where('status', 'active')->paginate(9);
         $recent_products = \App\Models\Product::where('status', 'active')->orderBy('created_at', 'desc')->limit(3)->get();
         $categories = Category::with('children')->where('is_parent', 1)->whereNull('parent_id')->where('status', 'active')->orderBy('title', 'asc')->get();
-        return view('frontend.pages.product-grids', compact('products', 'categories','recent_products'));
+        return view('frontend.pages.product-grids', compact('products', 'categories', 'recent_products'));
     }
 
 
@@ -239,15 +239,25 @@ class FrontendController extends Controller
         return view('auth.passwords.old-reset');
     }
 
-    /* Newsletter subscribe */
     public function subscribe(Request $request)
     {
-        if (!Newsletter::isSubscribed($request->email)) {
-            Newsletter::subscribePending($request->email);
-            return Newsletter::lastActionSucceeded()
-                ? redirect()->route('home')->with('success', 'Subscribed! Please check your email')
-                : back()->with('error', 'Something went wrong!');
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+        $mailchimp = new MailChimp(env('MAILCHIMP_APIKEY'));
+        $listId = env('MAILCHIMP_LIST_ID');
+        $result = $mailchimp->post("lists/$listId/members", [
+            'email_address' => $request->email,
+            'status'        => 'subscribed',
+        ]);
+        if ($mailchimp->success()) {
+            return back()->with('success', 'You have been subscribed!');
+        } else {
+            dd([
+                'error'     => $mailchimp->getLastError(),
+                'response'  => $mailchimp->getLastResponse(),
+                'request'   => $mailchimp->getLastRequest(),
+            ]);
         }
-        return back()->with('error', 'Already Subscribed');
     }
 }

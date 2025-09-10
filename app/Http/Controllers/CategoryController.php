@@ -64,28 +64,12 @@ class CategoryController extends Controller
         else{
             request()->session()->flash('error','Error occurred, Please try again!');
         }
-        return redirect()->route('category.index');
-
-
+        return redirect()->route('admin.category.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
-    {
-        //
-    }
+    {}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $parent_cats=Category::where('is_parent',1)->get();
@@ -93,13 +77,6 @@ class CategoryController extends Controller
         return view('backend.category.edit')->with('category',$category)->with('parent_cats',$parent_cats);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         // return $request->all();
@@ -122,7 +99,7 @@ class CategoryController extends Controller
         else{
             request()->session()->flash('error','Error occurred, Please try again!');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -147,7 +124,7 @@ class CategoryController extends Controller
         else{
             request()->session()->flash('error','Error while deleting category');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     public function getChildByParent(Request $request){

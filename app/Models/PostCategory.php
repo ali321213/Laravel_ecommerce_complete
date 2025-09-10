@@ -3,16 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class PostCategory extends Model
 {
-    protected $fillable=['title','slug','status'];
+    use HasFactory;
 
-    public function post(){
-        return $this->hasMany('App\Models\Post','post_cat_id','id')->where('status','active');
+    protected $fillable = ['title', 'slug', 'status'];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'post_cat_id')
+            ->where('status', 'active')
+            ->latest();
     }
 
-    public static function getBlogByCategory($slug){
-        return PostCategory::with('post')->where('slug',$slug)->first();
+    public static function getBlogByCategory(string $slug)
+    {
+        return self::with('posts')
+            ->where('slug', $slug)
+            ->first();
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
     }
 }

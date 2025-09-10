@@ -185,4 +185,22 @@ class Helper
         }
         return $total;
     }
+
+    /* Post category list */
+    public static function postCategoryList(string $option = 'all')
+    {
+        return $option === 'all' ? PostCategory::latest()->get() : PostCategory::has('posts')->latest()->get();
+    }
+
+    /* Alias for postCategories */
+    // public static function postCategoryList(string $option = 'all')
+    // {
+    //     return self::postCategories($option);
+    // }
+
+    /* Alias for postTags */
+    public static function postTagList(string $option = 'all')
+    {
+        return self::postTags($option);
+    }
 }

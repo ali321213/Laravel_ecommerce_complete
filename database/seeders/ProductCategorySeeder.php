@@ -12,17 +12,17 @@ class ProductCategorySeeder extends Seeder
             [
                 'name' => 'Cars',
                 'description' => 'All types of cars and related accessories.',
-                'image' => 'categories/cars.jpg',
+                'image' => 'categories/cars.png',
             ],
             [
                 'name' => 'Electronics',
                 'description' => 'Electronic gadgets and devices.',
-                'image' => 'categories/electronics.jpg',
+                'image' => 'categories/cars.png',
             ],
             [
                 'name' => 'Fashion',
                 'description' => 'Clothing and accessories.',
-                'image' => 'categories/fashion.jpg',
+                'image' => 'categories/cars.png',
             ],
         ];
 
